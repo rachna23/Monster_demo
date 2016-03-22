@@ -1,0 +1,19 @@
+<%= form_for current_user, url: wizard_path do |f| %>
+  <h2>Tell us a little about yourself</h2>
+  <div class="field">
+    <%= f.label :industry %><br />
+    <%= f.text_field :industry %>
+  </div>
+   <div class="field">
+    <%= f.label :education_details %><br />
+    <%= f.text_field :education_details %>
+  </div>
+  <div class="field">
+    <%= f.label :previous_company_details %><br />
+    <%= f.text_field :previous_company_details %>
+  </div>
+  <div class="actions">
+        <%= f.submit "Continue" %>
+  </div>
+<% end %>
+

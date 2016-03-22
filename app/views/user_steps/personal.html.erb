@@ -1,0 +1,28 @@
+<%= form_for current_user, url: wizard_path do |f| %>
+  <h2>Tell us a little about yourself</h2>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+   <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :mobile_number %><br />
+    <%= f.text_field :mobile_number %>
+  </div>
+   <div class="field">
+    <%= f.label :current_location %><br />
+    <%= f.text_field :current_location %>
+  </div>
+  <div class="field">
+    <%= f.label :total_experience %><br />
+    <%= f.text_field :total_experience %>
+  </div>
+  <div class="actions">
+      <%= f.submit "Continue" %>
+      or <%= link_to "skip this step", next_wizard_path %>
+  </div>
+<% end %>
+
