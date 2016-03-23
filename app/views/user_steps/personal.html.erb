@@ -20,6 +20,12 @@
     <%= f.label :total_experience %><br />
     <%= f.text_field :total_experience %>
   </div>
+  <div class="field">
+    <%= "Priffered location" %><br />
+    <%= select_tag "user[country_ids][]", options_for_select(Country.all.collect{|x| [x.name,x.id]}), {:multiple => :multiple, :size => 10} %>
+
+  </div>  
+
   <div class="actions">
       <%= f.submit "Continue" %>
       or <%= link_to "skip this step", next_wizard_path %>

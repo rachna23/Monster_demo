@@ -3,6 +3,7 @@ class UserStepsController < ApplicationController
   steps :personal, :professional
 
 	def update
+    byebug
 		@user = current_user
 	 	current_user.update_attributes(user_params)
   	render_wizard @user
@@ -18,7 +19,7 @@ class UserStepsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name,:last_name,:mobile_number,:current_location,:total_experience,:industry,:education_details,:previous_company_details)
+    params.require(:user).permit(:first_name,:last_name,:mobile_number,:current_location,:total_experience,:industry,:education_details,:previous_company_details, {:country_ids => []})
   end
 
 	def wicked_finish
