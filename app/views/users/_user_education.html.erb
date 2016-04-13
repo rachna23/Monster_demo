@@ -1,0 +1,25 @@
+<%= nested_form_for(user, url: post_user_education_details_user_path, method: :post)  do |f| %>
+  <%= f.fields_for :user_education_details do |user_education_detail| %>
+    <div class="field">
+      <%= f.label :higest_education %><br />
+      <%= user_education_detail.text_field :higest_education %>
+    </div>
+    <div class="field">
+      <%= f.label :specilization %><br />
+      <%= user_education_detail.text_area :specilization %>
+    </div>
+    <div class="field">
+      <%= f.label :institute %><br />
+      <%= user_education_detail.text_area :institute %>
+    </div>
+    <div class="field">
+      <%= f.label :passing_year %><br />
+      <%= user_education_detail.text_area :passing_year %>
+    </div>
+    <%= user_education_detail.link_to_remove "Remove this task" %> 
+  <% end %>
+  <p><%= f.link_to_add "Add Details", :user_education_details %></p>
+  <%= f.submit %>
+
+<% end %>  
+

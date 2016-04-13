@@ -1,0 +1,17 @@
+<%= current_user.try(:first_name) %><br/>
+<%#= current_user.try(:last_name) %>
+<%= current_user.try(:current_location) %><br/>
+
+<%= current_user.try(:mobile_number) %> <br/>
+
+<%= current_user.try(:industry) %> <br/>
+
+
+
+<%= current_user.try(:education_details) %> <br/>
+<div id = "link-delete"></div>
+<% if current_user.present? %>	
+	<%= link_to "Add education details", get_user_education_details_user_path(current_user),  {:remote => true, :id => 'education_details'} %>
+		<%#= link_to "Add education details", get_user_education_details_user_path(current_user) %>
+<% end %>
+<%= current_user.try(:previous_company_details) %>

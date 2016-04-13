@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323144354) do
+ActiveRecord::Schema.define(version: 20160411144637) do
 
   create_table "countries", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "code",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4
+    t.integer  "notice_period", limit: 4
+    t.integer  "dob",           limit: 4
+    t.integer  "job_type",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "user_countries", force: :cascade do |t|
@@ -27,27 +36,44 @@ ActiveRecord::Schema.define(version: 20160323144354) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "user_education_details", force: :cascade do |t|
+    t.string   "higest_education",                  limit: 255
+    t.string   "specilization",                     limit: 255
+    t.string   "institute",                         limit: 255
+    t.integer  "passing_year",                      limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.integer  "profile_id",                        limit: 4
+    t.integer  "user_id",                           limit: 4
+    t.integer  "user_education_details_attributes", limit: 4
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                    limit: 255, default: "", null: false
-    t.string   "encrypted_password",       limit: 255, default: "", null: false
-    t.string   "reset_password_token",     limit: 255
+    t.string   "email",                     limit: 255, default: "", null: false
+    t.string   "encrypted_password",        limit: 255, default: "", null: false
+    t.string   "reset_password_token",      limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",             limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",       limit: 255
-    t.string   "last_sign_in_ip",          limit: 255
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "first_name",               limit: 255
-    t.string   "last_name",                limit: 255
-    t.string   "current_location",         limit: 255
-    t.integer  "mobile_number",            limit: 4
-    t.integer  "total_experience",         limit: 4
-    t.string   "industry",                 limit: 255
-    t.string   "education_details",        limit: 255
-    t.string   "previous_company_details", limit: 255
+    t.string   "current_sign_in_ip",        limit: 255
+    t.string   "last_sign_in_ip",           limit: 255
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.string   "first_name",                limit: 255
+    t.string   "last_name",                 limit: 255
+    t.string   "current_location",          limit: 255
+    t.integer  "mobile_number",             limit: 4
+    t.integer  "total_experience",          limit: 4
+    t.string   "industry",                  limit: 255
+    t.string   "education_details",         limit: 255
+    t.string   "previous_company_details",  limit: 255
+    t.string   "avatar_file_name",          limit: 255
+    t.string   "avatar_content_type",       limit: 255
+    t.integer  "avatar_file_size",          limit: 4
+    t.datetime "avatar_updated_at"
+    t.integer  "user_education_details_id", limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

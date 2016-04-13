@@ -4,6 +4,7 @@
   <title>MonsterDemo</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag :defaults, "nested_form" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,8 +12,6 @@
 	<ul class="nav nav-pills"> 
 		<% if user_signed_in? %>
 			<li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
-			<li> <%#= link_to('Add Event', new_event_path) %> </li>
-			<li> <%#= link_to('Add Bill details', new_bill_detail_path) %> </li>
 		<% else %>
 			<li> <%= link_to('Login', new_user_session_path)  %> </li>
 			<li> <%= link_to('Register', new_user_registration_path)  %> </li>
@@ -22,8 +21,6 @@
 <div class="container">
   <div class="panel panel-default">	
     <%= yield %>
-    <%#= yield :role_sidebar %>
-    <%#= yield :role_main %>
   </div>  
 </body>
 </html>

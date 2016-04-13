@@ -25,6 +25,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'wicked'
 gem 'country-select'
+gem "paperclip", "~> 4.3.6"
+
+
+gem "less-rails"
+gem "twitter-bootstrap-rails"
+gem "nested_form"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

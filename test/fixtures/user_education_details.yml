@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  higest_education: MyString
+  specilization: MyString
+  institute: MyString
+  passing_year: 1
+
+two:
+  higest_education: MyString
+  specilization: MyString
+  institute: MyString
+  passing_year: 1
