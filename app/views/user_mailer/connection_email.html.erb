@@ -1,0 +1,7 @@
+Hi,
+
+<%= @user.email %> Have sent you the connection request. For finding more details and connecting to this user click on the link below.
+
+<%#= link_to user_url(@user.id), 'Click Me' %>
+Click here to view the user profile: <%= link_to "Click Me", user_url(@user.id, :connecting_user_id => 
+@want_to_connect_user_id) %>

@@ -31,7 +31,10 @@ gem "paperclip", "~> 4.3.6"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem "nested_form"
-
+gem 'bootstrap_form'
+gem 'best_in_place', '~> 3.0.1'
+gem "private_pub"
+gem "thin"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

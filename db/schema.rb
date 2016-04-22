@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411144637) do
+ActiveRecord::Schema.define(version: 20160422120559) do
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id",    limit: 4
+    t.integer  "recipient_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
+  add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -20,6 +30,17 @@ ActiveRecord::Schema.define(version: 20160411144637) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body",            limit: 65535
+    t.integer  "conversation_id", limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
     t.integer  "notice_period", limit: 4
@@ -27,6 +48,14 @@ ActiveRecord::Schema.define(version: 20160411144637) do
     t.integer  "job_type",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "user_connections", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "count",             limit: 4
+    t.integer  "connected_user_id", limit: 4
   end
 
   create_table "user_countries", force: :cascade do |t|
@@ -79,4 +108,6 @@ ActiveRecord::Schema.define(version: 20160411144637) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
 end

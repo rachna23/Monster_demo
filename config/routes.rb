@@ -2,14 +2,32 @@ Rails.application.routes.draw do
   get 'home/index'
 
   devise_for :users, :controllers => {:registrations => "users/registrations"}
+  devise_scope :user do
+    authenticated :user do
+      root 'home#index', as: :authenticated_root
+    end
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+  
+  resources :conversations do
+    resources :messages
+  end
+
   resources :users do
     member do
       get 'get_user_education_details'
       post 'post_user_education_details'
+      get 'user_connections'
+      get 'send_connection_email'
     end
   end
+  match "users/:id/count_user_connections" => "users#count_user_connections", as: :count_user_connections, via: [:get, :post]
+
   resources :user_steps do 
   end   
+  resources :messages
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # validates_presence_of :first_name,:last_name       
+
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/       
 
@@ -13,4 +15,7 @@ class User < ActiveRecord::Base
   after_create :create_profile  
   has_many :user_education_details, dependent: :destroy 
   accepts_nested_attributes_for :user_education_details
+  has_many :user_connections
+  has_many :conversations, :foreign_key => :sender_id
+  
 end

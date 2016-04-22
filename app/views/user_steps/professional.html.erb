@@ -1,20 +1,15 @@
-<%= form_for current_user, url: wizard_path , html: { multipart: true } do |f| %>
-  <h2>Tell us a little about yourself</h2>
-  <div class="field">
-    <%= f.label :industry %><br />
-    <%= f.text_field :industry %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+   <h3 class="panel-title">Pfofessional Information</h3>
   </div>
-   <div class="field">
-    <%= f.label :education_details %><br />
-    <%= f.text_field :education_details %>
-  </div>
-  <div class="field">
-    <%= f.label :previous_company_details %><br />
-    <%= f.text_field :previous_company_details %>
-  </div>
-  <%= f.file_field :avatar %>
-  <div class="actions">
-        <%= f.submit "Continue" %>
-  </div>
-<% end %>
 
+  <div class="panel-body">
+    <%= bootstrap_form_for current_user, url: wizard_path , html: { multipart: true } do |f| %>
+      <%= f.text_field :industry %>
+      <%= f.text_field :education_details %>
+      <%= f.text_field :previous_company_details %>
+      <%= f.file_field :avatar %>
+      <%= f.submit "Continue", :class => 'btn btn-primary' %>
+    <% end %>
+  </div>  
+</div>

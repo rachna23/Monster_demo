@@ -1,17 +1,135 @@
-<%= current_user.try(:first_name) %><br/>
-<%#= current_user.try(:last_name) %>
-<%= current_user.try(:current_location) %><br/>
+ <h2 class="panel-title">User Details</h2><br/>
 
-<%= current_user.try(:mobile_number) %> <br/>
+<div class="panel panel-default">
+  <div class="panel-heading">
+   <h3 class="panel-title">Edit Personal Information </h3>
+  </div>
+  <div class="panel-body">  
+    <strong>Email:</strong> <%= current_user.try(:email) %><br/>
+		<%- unless current_user.current_location.blank? %>
+			<strong>Current Location:</strong> 
+			<%= best_in_place current_user, :current_location %><br/>
+		<%- else %> 
+			<%= not_present %>
+		<% end %>
+		<%- unless current_user.first_name.blank? %>
+			<strong>First name:</strong> 
+			<%= best_in_place current_user, :first_name %><br/>
+		<%- else %> 
+			<%= not_present %>
+		<% end %>
+		<%- unless current_user.last_name.blank? %>
+			<strong>Last name:</strong> 
+			<%= best_in_place current_user, :last_name %><br/>
+		<%- else %> 
+			<%= not_present %>
+		<% end %>	
+		<%- unless current_user.first_name.blank? %>
+			<strong>Full Name</strong> <%= full_name(current_user) %><br/>
+		<%- else %>
+			<%= not_present %>
+		<% end %>	
+		<%- unless current_user.mobile_number.blank? %>
+			<strong>Mobile Number</strong> <%= best_in_place current_user, :mobile_number %>
+		<%- else %>
+			<%= not_present %>	
+		<% end %>	
+  </div>  
+</div>
 
-<%= current_user.try(:industry) %> <br/>
+<div class="panel panel-default">
+  <div class="panel-heading">
+   <h3 class="panel-title">Edit Professional Information</h3>
+  </div>
+  <div class="panel-body">
+		<strong>Industry:</strong>
+		<%- unless current_user.industry.blank? %>
+			<%= current_user.try(:industry) %> <br/>
+		<%- else %>
+			<%= not_present %>
+		<% end %>
+		<strong>Education Details:</strong>
+		<%- unless current_user.education_details.blank? %> 
+			<%= current_user.try(:education_details) %> <br/>
+		<%- else %>
+			<%= not_present %>
+		<% end %>
+		<strong>Previous company details:</strong>
+		<%- unless current_user.previous_company_details.blank? %> 
+			<%= current_user.try(:previous_company_details) %> <br/>
+		<%- else %>
+			<%= not_present %><br/>
+		<% end %>
+		<strong>Avatar:</strong>
+		<%- unless current_user.avatar.blank? %> 
+			<%= current_user.try(:avatar) %> <br/>
+		<%- else %>
+			<%= not_present %>
+		<% end %>
+  </div>  
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+   <h3 class="panel-title">Educational details</h3>
+  </div>
 
+  <div class="panel-body">
+  	<div id = "link-delete"></div>
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th>Higest Education</th>
+			      <th>Specilization</th>
+			      <th>Institute</th>
+			      <th>Passing Year</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <% current_user.user_education_details.each do |user_education_detail| %>
+			      <tr>
+			        <td> <% unless user_education_detail.higest_education.blank?  %>
+			        	<%= user_education_detail.higest_education %>
+			        	<% else %>
+			        		<%= not_present %>
+			        	<% end %>
+			        </td>
+			        <td> <% unless user_education_detail.specilization.blank?  %>
+			        	<%= user_education_detail.specilization %>
+			        	<% else %>
+			        		<%= not_present %>
+			        	<% end %>
+			        </td>
+			        <td> <% unless user_education_detail.institute.blank?  %>
+			        	<%= user_education_detail.institute %>
+			        	<% else %>
+			        		<%= not_present %>
+			        	<% end %>
+			        </td>
+			        <td> <% unless user_education_detail.passing_year.blank?  %>
+			        	<%= user_education_detail.passing_year %>
+			        	<% else %>
+			        		<%= not_present %>
+			        	<% end %>
+			        </td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
 
+		<% if current_user.present? && !params[:connecting_user_id].present? %>	
+			<%= link_to "Add education details", get_user_education_details_user_path(current_user),  {:remote => true, :id => 'education_details'} %>
+				<%#= link_to "Add education details", get_user_education_details_user_path(current_user) %>
+		<% end %>
+		<%= current_user.try(:previous_company_details) %>
+		<% if params[:connecting_user_id].present? %>
+			<%= link_to "Connect now", count_user_connections_path(params[:connecting_user_id]), :class => 'btn btn-primary' %>
+	<% end %>
+  </div>  
+</div>
 
-<%= current_user.try(:education_details) %> <br/>
-<div id = "link-delete"></div>
-<% if current_user.present? %>	
-	<%= link_to "Add education details", get_user_education_details_user_path(current_user),  {:remote => true, :id => 'education_details'} %>
-		<%#= link_to "Add education details", get_user_education_details_user_path(current_user) %>
-<% end %>
-<%= current_user.try(:previous_company_details) %>
+<script>
+    $(document).ready(function() {
+     // $('.menu-link').bigSlide();
+      $(".best_in_place").best_in_place();
+    });
+</script>

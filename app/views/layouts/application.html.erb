@@ -1,27 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta content='<%= user_signed_in? ? current_user.id : "" %>' name='user-id'/>
   <title>MonsterDemo</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag :defaults, "nested_form" %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-<nav class="navbar navbar-inverse" role="navigation">	
-	<ul class="nav nav-pills"> 
-		<% if user_signed_in? %>
-			<li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
-		<% else %>
-			<li> <%= link_to('Login', new_user_session_path)  %> </li>
-			<li> <%= link_to('Register', new_user_registration_path)  %> </li>
-		<% end %>
-	</ul>	
-</nav>	
-<div class="container">
-  <div class="panel panel-default">	
-    <%= yield %>
-  </div>  
+
+	<nav id="menu" class="navbar navbar-inverse" role="navigation">
+    <ul class="nav nav-pills">
+      <% if user_signed_in? %>
+    	 	<li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
+        <li> <%= link_to('Home', root_path) %> </li>
+        <li> <%= link_to('My Connections', user_connections_user_path(current_user)) %> </li>
+      <% else %>
+        <li> <%= link_to('Login', new_user_session_path)  %> </li>
+        <li> <%= link_to('Register', new_user_registration_path)  %> </li>
+   	  <% end %>
+    </ul>
+  </nav>    
+
+  <nav id="menu" class="navbar navbar-inverse" role="navigation">
+    <ul class="nav nav-pills">
+      <% if user_signed_in? %>
+        <li> <%= link_to('Logout', destroy_user_session_path,:method => :delete) %> </li>
+        <li> <%= link_to('Home', root_path) %> </li>
+      <% end %>  
+    </ul>
+  </nav>    
+   
+  <div class="wrap push">
+    <!--  <a href="#menu" class="menu-link">&#9776;</a> --> 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-2">
+    		    <%= yield %>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<script>
+    $(document).ready(function() {
+      $('.menu-link').bigSlide();
+      $(".best_in_place").best_in_place();
+    });
+</script>
 </body>
 </html>
 

@@ -1,34 +1,21 @@
-<%= form_for current_user, url: wizard_path do |f| %>
-  <h2>Tell us a little about yourself</h2>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+   <h3 class="panel-title">Personal Information</h3>
   </div>
-   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :mobile_number %><br />
-    <%= f.text_field :mobile_number %>
-  </div>
-   <div class="field">
-    <%= f.label :current_location %><br />
-    <%= f.text_field :current_location %>
-  </div>
-  <div class="field">
-    <%= f.label :total_experience %><br />
-    <%= f.text_field :total_experience %>
-  </div>
-  <div class="field">
-    <%= "Priffered location" %><br />
-    <%= select_tag "user[country_ids][]", options_for_select(Country.all.collect{|x| [x.name,x.id]}), {:multiple => :multiple, :size => 10} %>
 
+  <div class="panel-body">  
+    <%= bootstrap_form_for current_user, url: wizard_path do |f| %>
+      <h2>Tell us a little about yourself</h2>
+        <%= f.text_field :first_name %>
+        <%= f.text_field :last_name %>
+        <%= f.text_field :mobile_number %>
+        <%= f.text_field :current_location %>
+        <%= f.text_field :total_experience %>
+        <%= "Priffered location" %><br />
+        <%= select_tag "user[country_ids][]", options_for_select(Country.all.collect{|x| [x.name,x.id]}), {:multiple => :multiple, :size => 10} %>
+
+        <%= f.submit "Continue" , :class => 'btn btn-primary' %>
+          or <%= link_to "skip this step", next_wizard_path %>
+    <% end %>
   </div>  
-
-  <div class="actions">
-      <%= f.submit "Continue" %>
-      or <%= link_to "skip this step", next_wizard_path %>
-  </div>
-<% end %>
-
+</div>

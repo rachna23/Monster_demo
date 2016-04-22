@@ -13,6 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require chat
 //= require turbolinks
-//= require_tree .
 //= require jquery_nested_form
+//= require best_in_place
+//= require private_pub
+//= require_tree .
+
